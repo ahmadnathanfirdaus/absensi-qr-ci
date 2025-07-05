@@ -24,6 +24,11 @@ class Scan extends BaseController
 
   public function index($t = 'Masuk')
   {
+    // Jika petugas, redirect ke halaman dashboard
+    if (!user()->toArray()['is_superadmin']) {
+      return redirect()->to('admin');
+    }
+
     $data = ['waktu' => $t, 'title' => 'Absensi Siswa Berbasis QR Code'];
     return view('scan/scan', $data);
   }
